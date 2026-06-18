@@ -1,0 +1,120 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User account representing employee or owner of the UMKM",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "username": { "type": "string" },
+        "fullname": { "type": "string" },
+        "email": { "type": "string" },
+        "password": { "type": "string" },
+        "role": { "type": "string", "enum": ["Owner", "Manager", "Admin Toko", "Kasir"] },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "username", "fullname", "email", "role", "isActive", "createdAt"]
+    },
+    "Branch": {
+      "title": "Branch",
+      "description": "Commercial business branch or store owned by the UMKM",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "isMainBranch": { "type": "boolean" }
+      },
+      "required": ["id", "name", "address", "phone", "isActive"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product category",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "isActive", "createdAt"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Product items sold in the branches",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "price": { "type": "number" },
+        "stock": { "type": "number" },
+        "sku": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "image": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "categoryId", "price", "stock", "sku", "isActive", "createdAt"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Recorded POS sales transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "invoiceNumber": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "branchId": { "type": "string" },
+        "branchName": { "type": "string" },
+        "cashierId": { "type": "string" },
+        "cashierName": { "type": "string" },
+        "items": { "type": "array" },
+        "paymentMethod": { "type": "string", "enum": ["Tunai", "QRIS"] },
+        "totalAmount": { "type": "number" },
+        "cashPaid": { "type": "number" },
+        "changeAmount": { "type": "number" },
+        "qrisImageUrl": { "type": "string" }
+      },
+      "required": ["id", "invoiceNumber", "timestamp", "branchId", "branchName", "cashierId", "cashierName", "items", "paymentMethod", "totalAmount", "cashPaid", "changeAmount"]
+    },
+    "Setting": {
+      "title": "Setting",
+      "description": "Global or custom settings for the retail app",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "value": { "type": "string" }
+      },
+      "required": ["id", "value"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "Users repository"
+    },
+    "branches/{branchId}": {
+      "schema": "Branch",
+      "description": "Branches registry"
+    },
+    "categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Product categories list"
+    },
+    "products/{productId}": {
+      "schema": "Product",
+      "description": "Inventory products list"
+    },
+    "transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Sales transactions log"
+    },
+    "settings/{settingId}": {
+      "schema": "Setting",
+      "description": "Global configurations"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Remix: nusaPOS cloud",
+  "description": "Aplikasi Kasir Cloud Modern dengan integrasi registrasi berjenjang, kelola cabang, manajemen produk dan kategori, serta fitur upload QRIS transaksi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
